@@ -1,0 +1,26 @@
+{
+  "name": "stencil-apexcharts",
+  "version": "0.0.1",
+  "description": "Stencil Component for ApexCharts",
+  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "unpkg": "dist/ionic.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "peerDependencies": {
+    "apexcharts": "^3.4.1"
+  },
+  "devDependencies": {
+    "@stencil/core": "^0.16.4"
+  },
+  "license": "MIT"
+}
