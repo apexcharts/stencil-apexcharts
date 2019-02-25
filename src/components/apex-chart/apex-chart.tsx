@@ -7,14 +7,21 @@ import ApexCharts from 'apexcharts';
   shadow: false
 })
 export class chart {
-  el: HTMLElement;
+  chartRef: HTMLElement;
+
+  /**
+   * Internal ApexCharts instance
+   */
   @State() chart: ApexCharts = null;
 
+  /**
+   * ApexCharts options
+   */
   @Prop() options: object = {}
 
   componentDidLoad() {
     if (this.chart === null) {
-      this.chart = new ApexCharts(this.el, this.options);
+      this.chart = new ApexCharts(this.chartRef, this.options);
       return this.chart.render();  
     }
   }
@@ -25,6 +32,6 @@ export class chart {
     }
   }
   render() {
-    return <div ref={(el) => this.el = el}></div>;
+    return <div ref={(el) => this.chartRef = el}></div>;
   }
 }

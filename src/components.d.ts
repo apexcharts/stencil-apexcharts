@@ -13,9 +13,15 @@ import '@stencil/core';
 export namespace Components {
 
   interface ApexChart {
+    /**
+    * ApexCharts options
+    */
     'options': object;
   }
   interface ApexChartAttributes extends StencilHTMLAttributes {
+    /**
+    * ApexCharts options
+    */
     'options'?: object;
   }
 }
