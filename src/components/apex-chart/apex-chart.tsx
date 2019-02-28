@@ -42,26 +42,31 @@ export class chart {
 
   /**
    * ApexCharts type
+   * @see https://apexcharts.com/docs/options/chart/type/
    */
   @Prop() type: ApexChartType;
 
   /**
    * ApexChart height
+   * @see https://apexcharts.com/docs/options/chart/height/
    */
   @Prop() height: ApexChartHeight;
 
   /**
    * ApexChart width
+   * @see https://apexcharts.com/docs/options/chart/width/
    */
   @Prop() width: ApexChartWidth;
 
   /**
    * ApexCharts options
+   * @see https://apexcharts.com/docs/options/
    */
   @Prop() options: ApexOptions;
 
   /**
    * ApexCharts series
+   * @see https://apexcharts.com/docs/options/series/
    */
   @Prop() series: ApexOptionsSeries;
 
