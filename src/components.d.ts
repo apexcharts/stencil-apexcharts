@@ -8,21 +8,62 @@
 import '@stencil/core';
 
 
+import {
+  ApexChartHeight,
+  ApexChartType,
+  ApexChartWidth,
+  ApexOptionsSeries,
+} from './components/apex-chart/apex-charts';
+import {
+  ApexOptions,
+} from 'apexcharts';
 
 
 export namespace Components {
 
   interface ApexChart {
     /**
-    * ApexCharts options
+    * ApexChart height
     */
-    'options': object;
-  }
-  interface ApexChartAttributes extends StencilHTMLAttributes {
+    'height': ApexChartHeight;
     /**
     * ApexCharts options
     */
-    'options'?: object;
+    'options': ApexOptions;
+    /**
+    * ApexCharts series
+    */
+    'series': ApexOptionsSeries;
+    /**
+    * ApexCharts type
+    */
+    'type': ApexChartType;
+    /**
+    * ApexChart width
+    */
+    'width': ApexChartWidth;
+  }
+  interface ApexChartAttributes extends StencilHTMLAttributes {
+    /**
+    * ApexChart height
+    */
+    'height'?: ApexChartHeight;
+    /**
+    * ApexCharts options
+    */
+    'options'?: ApexOptions;
+    /**
+    * ApexCharts series
+    */
+    'series'?: ApexOptionsSeries;
+    /**
+    * ApexCharts type
+    */
+    'type'?: ApexChartType;
+    /**
+    * ApexChart width
+    */
+    'width'?: ApexChartWidth;
   }
 }
 

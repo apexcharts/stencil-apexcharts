@@ -17,10 +17,10 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "peerDependencies": {
-    "apexcharts": "^3.4.1"
+    "apexcharts": "github:apexcharts/apexcharts.js"
   },
   "devDependencies": {
-    "@stencil/core": "^0.16.4"
+    "@stencil/core": "^0.18.0"
   },
   "license": "MIT"
 }

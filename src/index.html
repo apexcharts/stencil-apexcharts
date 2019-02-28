@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-  <title>Stencil Component Starter</title>
-  <script src="/build/apex.js"></script>
-
-</head>
-<body>
-
-  <apex-chart></apex-chart>
-  <script>
-    const chart = document.querySelector('apex-chart');
-    chart.options = {
-    chart: {
-      type: 'line'
-    },
-    series: [{
-      name: 'sales',
-      data: [30,40,35,50,49,60,70,91,125]
-    }],
-    xaxis: {
-      categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
-    }
-  };
-  </script>
-
-  <!-- <custom-clock></custom-clock> -->
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+    <script src="/build/apex.js"></script>
+  </head>
+  <body>
+    <apex-chart type="bar" width="50%"></apex-chart>
+    <script>
+      const chart = document.querySelector('apex-chart');
+      chart.options = {
+        series: [
+          {
+            name: 'sales',
+            data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+          }
+        ],
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+        }
+      };
+    </script>
+  </body>
 </html>
