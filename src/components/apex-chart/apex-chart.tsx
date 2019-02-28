@@ -41,25 +41,25 @@ export class chart {
   @State() chartObj: ApexCharts = null;
 
   /**
-   * ApexCharts type
+   * (optional) Type
    * @see https://apexcharts.com/docs/options/chart/type/
    */
   @Prop() type?: ApexChartType;
 
   /**
-   * ApexChart width
+   * (optional) Width
    * @see https://apexcharts.com/docs/options/chart/width/
    */
   @Prop() width?: ApexChartWidth;
 
   /**
-   * ApexChart height
+   * (optional) Height
    * @see https://apexcharts.com/docs/options/chart/height/
    */
   @Prop() height?: ApexChartHeight;
 
   /**
-   * ApexCharts options
+   * (optional) Options
    * @see https://apexcharts.com/docs/options/
    */
   @Prop({ mutable: true }) options?: ApexOptions;
@@ -74,7 +74,7 @@ export class chart {
   }
 
   /**
-   * ApexCharts series
+   * (optional) Series
    * @see https://apexcharts.com/docs/options/series/
    */
   @Prop({ mutable: true }) series?: ApexOptionsSeries;

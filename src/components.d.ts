@@ -23,45 +23,45 @@ export namespace Components {
 
   interface ApexChart {
     /**
-    * ApexChart height
+    * (optional) Height
     */
     'height'?: ApexChartHeight;
     /**
-    * ApexCharts options
+    * (optional) Options
     */
     'options'?: ApexOptions;
     /**
-    * ApexCharts series
+    * (optional) Series
     */
     'series'?: ApexOptionsSeries;
     /**
-    * ApexCharts type
+    * (optional) Type
     */
     'type'?: ApexChartType;
     /**
-    * ApexChart width
+    * (optional) Width
     */
     'width'?: ApexChartWidth;
   }
   interface ApexChartAttributes extends StencilHTMLAttributes {
     /**
-    * ApexChart height
+    * (optional) Height
     */
     'height'?: ApexChartHeight;
     /**
-    * ApexCharts options
+    * (optional) Options
     */
     'options'?: ApexOptions;
     /**
-    * ApexCharts series
+    * (optional) Series
     */
     'series'?: ApexOptionsSeries;
     /**
-    * ApexCharts type
+    * (optional) Type
     */
     'type'?: ApexChartType;
     /**
-    * ApexChart width
+    * (optional) Width
     */
     'width'?: ApexChartWidth;
   }
