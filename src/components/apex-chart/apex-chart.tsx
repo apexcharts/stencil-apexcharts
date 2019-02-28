@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop, State, Watch } from '@stencil/core';
 import ApexCharts from 'apexcharts';
 import { ApexOptions } from 'apexcharts';
 import {
@@ -47,28 +47,44 @@ export class chart {
   @Prop() type: ApexChartType;
 
   /**
-   * ApexChart height
-   * @see https://apexcharts.com/docs/options/chart/height/
-   */
-  @Prop() height: ApexChartHeight;
-
-  /**
    * ApexChart width
    * @see https://apexcharts.com/docs/options/chart/width/
    */
   @Prop() width: ApexChartWidth;
 
   /**
+   * ApexChart height
+   * @see https://apexcharts.com/docs/options/chart/height/
+   */
+  @Prop() height: ApexChartHeight;
+
+  /**
    * ApexCharts options
    * @see https://apexcharts.com/docs/options/
    */
-  @Prop() options: ApexOptions;
+  @Prop({ mutable: true }) options: ApexOptions;
+
+  @Watch('options')
+  optionsChanged(options) {
+    if (this.chartObj !== null) {
+      return this.chartObj.updateOptions(
+        config(options, this.type, this.width, options, this.series)
+      );
+    }
+  }
 
   /**
    * ApexCharts series
    * @see https://apexcharts.com/docs/options/series/
    */
-  @Prop() series: ApexOptionsSeries;
+  @Prop({ mutable: true }) series: ApexOptionsSeries;
+
+  @Watch('series')
+  seriesChanged(series) {
+    if (this.chartObj !== null) {
+      this.chartObj.updateSeries(series, true);
+    }
+  }
 
   componentDidLoad() {
     if (this.chartObj === null) {
