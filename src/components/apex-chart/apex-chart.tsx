@@ -44,25 +44,25 @@ export class chart {
    * ApexCharts type
    * @see https://apexcharts.com/docs/options/chart/type/
    */
-  @Prop() type: ApexChartType;
+  @Prop() type?: ApexChartType;
 
   /**
    * ApexChart width
    * @see https://apexcharts.com/docs/options/chart/width/
    */
-  @Prop() width: ApexChartWidth;
+  @Prop() width?: ApexChartWidth;
 
   /**
    * ApexChart height
    * @see https://apexcharts.com/docs/options/chart/height/
    */
-  @Prop() height: ApexChartHeight;
+  @Prop() height?: ApexChartHeight;
 
   /**
    * ApexCharts options
    * @see https://apexcharts.com/docs/options/
    */
-  @Prop({ mutable: true }) options: ApexOptions;
+  @Prop({ mutable: true }) options?: ApexOptions;
 
   @Watch('options')
   optionsChanged(options) {
@@ -77,7 +77,7 @@ export class chart {
    * ApexCharts series
    * @see https://apexcharts.com/docs/options/series/
    */
-  @Prop({ mutable: true }) series: ApexOptionsSeries;
+  @Prop({ mutable: true }) series?: ApexOptionsSeries;
 
   @Watch('series')
   seriesChanged(series) {
