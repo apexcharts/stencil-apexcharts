@@ -68,6 +68,21 @@
 </script>
 ```
 
+### How do I update the chart?
+
+Simple! Just change the `series` or `options` and it will automatically re-render the chart.
+<p align="center"><a href="#"><img src="https://apexcharts.com/media/react-chart-updation.gif"></a></p>
+
+## Properties
+
+| Property  | Attribute | Description        | Type          | Default     |
+| --------- | --------- | ------------------ | --------------| ----------- |
+| `height`  | `height`  | Can be `100%` or `300px` or 300  | `number \| string` | `undefined` |
+| `options` | --        | The configuration object [API (Reference)](https://apexcharts.com/docs/options/) | `ApexOptions` | `undefined` |
+| `series`  | --        | The series [API (Reference)](https://apexcharts.com/docs/series/)  | `number[] \| { name: string; data: number[] \| { x: string; y: number; }[]; }[]` | `undefined` |
+| `type`    | `type`    | Chart type [API (Reference)](https://apexcharts.com/docs/options/chart/type/)    | `"area" \| "bar" \| "bubble" \| "candlestick" \| "donut" \| "heatmap" \| "histogram" \| "line" \| "pie" \| "radar" \| "radialBar" \| "scatter"` | `undefined` |
+| `width`   | `width`   | Can be `100%` or `400px` or 400   | `number \| string` | `undefined` |
+
 ## Development
 
 #### Install dependencies
