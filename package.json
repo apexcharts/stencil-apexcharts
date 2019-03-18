@@ -11,6 +11,13 @@
     "type": "git",
     "url": "https://github.com/apexcharts/stencil-apexcharts.git"
   },
+  "keywords": [
+    "apexcharts",
+    "stencil",
+    "charts",
+    "data-visualization",
+    "web components"
+  ],
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
   "unpkg": "dist/ionic.js",
