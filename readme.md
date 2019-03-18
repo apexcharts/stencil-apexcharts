@@ -1,8 +1,8 @@
 <p align="center"><img src="assets/stencil-apexcharts.png"></p>
 
 <p align="center">
-  <a href="https://github.com/mikaelkaron/stencil-apexcharts/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License"></a>
-  <a href="https://travis-ci.com/mikaelkaron/stencil-apexcharts"><img src="https://api.travis-ci.com/mikaelkaron/stencil-apexcharts.svg?branch=master" alt="build" /></a>
+  <a href="https://github.com/apexcharts/stencil-apexcharts/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License"></a>
+  <a href="https://travis-ci.com/apexcharts/stencil-apexcharts"><img src="https://api.travis-ci.com/apexcharts/stencil-apexcharts.svg?branch=master" alt="build" /></a>
   <a href="https://www.npmjs.com/package/stencil-apexcharts"><img src="https://img.shields.io/npm/v/stencil-apexcharts.svg" alt="ver"></a>
 </p>
 
