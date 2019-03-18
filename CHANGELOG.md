@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.2](https://github.com/apexcharts/stencil-apexcharts/compare/v0.0.1...v0.0.2) (2019-03-18)
+
+
+### Bug Fixes
+
+* Add repository to package.json ([3434722](https://github.com/apexcharts/stencil-apexcharts/commit/3434722))
+* Update urls in README to apexcharts ([d67b74b](https://github.com/apexcharts/stencil-apexcharts/commit/d67b74b))
+* Use absolute URL for logo in README ([720baa6](https://github.com/apexcharts/stencil-apexcharts/commit/720baa6)), closes [#1](https://github.com/apexcharts/stencil-apexcharts/issues/1)
+
+
+
 ## 0.0.1 (2019-03-18)
 
 
