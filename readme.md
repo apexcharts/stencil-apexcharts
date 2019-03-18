@@ -6,7 +6,7 @@
   <a href="https://www.npmjs.com/package/stencil-apexcharts"><img src="https://img.shields.io/npm/v/stencil-apexcharts.svg" alt="ver"></a>
 </p>
 
-<p align="center">Stencil.js wrapper for <a href="https://github.com/apexcharts/apexcharts.js">ApexCharts</a> to build interactive visualizations in stencil.</p>
+<p align="center"><a href="https://stenciljs.com">Stencil.js</a> wrapper for <a href="https://apexcharts.com">ApexCharts</a> to build interactive visualizations in stencil.</p>
 
 <p align="center"><a href="https://apexcharts.com/javascript-chart-demos/"><img src="https://apexcharts.com/media/apexcharts-banner.png"></a></p>
 
