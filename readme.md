@@ -15,7 +15,7 @@
 
 #### Script tag
 
-- Put a script tag similar to this `<script src='https://unpkg.com/stencil-apexcharts@0.0.1/dist/apex.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/stencil-apexcharts/dist/apex.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc.
 
 #### Node Modules
