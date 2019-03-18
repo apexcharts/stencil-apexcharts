@@ -29,7 +29,6 @@ const config = (
 };
 @Component({
   tag: 'apex-chart',
-  styleUrl: 'apex-chart.css',
   shadow: false
 })
 export class chart {
