@@ -40,5 +40,10 @@
     "@stencil/core": "^0.18.1",
     "standard-version": "^5.0.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "standard-version": {
+    "scripts": {
+      "prerelease": "npm run build"
+    }
+  }
 }
