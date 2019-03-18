@@ -21,7 +21,7 @@
 #### Node Modules
 
 - Run `npm install stencil-apexcharts apexcharts --save`
-- Put a script tag similar to this <script src='node_modules/stencil-apexcharts/dist/apex.js'></script> in the head of your index.html
+- Put a script tag similar to this `<script src='node_modules/stencil-apexcharts/dist/apex.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc.
 
 #### In a stencil-app-starter app
