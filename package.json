@@ -34,7 +34,7 @@
     "release": "standard-version"
   },
   "peerDependencies": {
-    "apexcharts": "apexcharts^3.6.3"
+    "apexcharts": "apexcharts^3.6.4"
   },
   "devDependencies": {
     "@stencil/core": "^0.18.1",
