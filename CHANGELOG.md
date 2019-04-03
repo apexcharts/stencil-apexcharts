@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.0.0](https://github.com/apexcharts/stencil-apexcharts/compare/v0.0.4...v1.0.0) (2019-04-03)
+
+
+### Bug Fixes
+
+* Set display:block on apex-chart element ([4f56e38](https://github.com/apexcharts/stencil-apexcharts/commit/4f56e38))
+
+
+### Features
+
+* Enable shadow dom ([eb8da21](https://github.com/apexcharts/stencil-apexcharts/commit/eb8da21))
+
+
+### BREAKING CHANGES
+
+* Adds shadow dom code - probably breaks older browsers.
+
+
+
 ## [0.0.4](https://github.com/apexcharts/stencil-apexcharts/compare/v0.0.3...v0.0.4) (2019-03-25)
 
 
