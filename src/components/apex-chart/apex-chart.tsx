@@ -28,7 +28,8 @@ const config = (
   return series ? { ...options, chart, series } : { ...options, chart };
 };
 @Component({
-  tag: 'apex-chart'
+  tag: 'apex-chart',
+  styleUrl: 'apex-chart.css'
 })
 export class chart {
   chartRef: HTMLElement;
