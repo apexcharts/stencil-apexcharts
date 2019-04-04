@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch } from '@stencil/core';
+import { Component, Element, Prop, State, Watch } from '@stencil/core';
 import ApexCharts from 'apexcharts';
 import { ApexOptions } from 'apexcharts';
 import {
@@ -32,6 +32,7 @@ const config = (
   styleUrl: 'apex-chart.css'
 })
 export class chart {
+  @Element()
   chartRef: HTMLElement;
 
   /**
@@ -87,11 +88,11 @@ export class chart {
 
   componentDidLoad() {
     if (this.chartObj === null) {
-      this.chartObj = new ApexCharts(
-        this.chartRef,
-        config(this.options, this.type, this.width, this.height, this.series)
-      );
-      return this.chartObj.render();
+        this.chartObj = new ApexCharts(
+          this.chartRef,
+          config(this.options, this.type, this.width, this.height, this.series)
+        );
+        return this.chartObj.render();
     }
   }
 
@@ -99,9 +100,5 @@ export class chart {
     if (this.chartObj !== null) {
       this.chartObj.destroy();
     }
-  }
-
-  render() {
-    return <div ref={el => (this.chartRef = el)} />;
   }
 }
