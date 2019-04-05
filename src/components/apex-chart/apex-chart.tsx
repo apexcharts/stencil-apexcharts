@@ -107,14 +107,17 @@ export class chart {
     return this.chartObj.updateOptions(newOptions, redrawPaths, animate);
   }
 
-  componentDidLoad() {
+  componentWillLoad() {
     if (this.chartObj === null) {
-        this.chartObj = new ApexCharts(
-          this.chartRef,
-          config(this.options, this.type, this.width, this.height, this.series)
-        );
-        return this.chartObj.render();
+      this.chartObj = new ApexCharts(
+        this.chartRef,
+        config(this.options, this.type, this.width, this.height, this.series)
+      );
     }
+  }
+
+  async render() {
+    return this.chartObj.render();
   }
 
   componentDidUnload() {
