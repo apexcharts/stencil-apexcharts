@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/apexcharts/stencil-apexcharts/raw/master/assets/stencil-apexcharts.png"></p>
+<p align="center"><img src="https://github.com/apexcharts/stencil-apexcharts/raw/master/src/assets/stencil-apexcharts.png"></p>
 
 <p align="center">
   <a href="https://github.com/apexcharts/stencil-apexcharts/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License"></a>
