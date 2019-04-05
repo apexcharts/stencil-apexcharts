@@ -27,6 +27,12 @@ const config = (
   }
   return series ? { ...options, chart, series } : { ...options, chart };
 };
+
+if (window) {
+  const win = window as any;
+  win.ApexCharts = ApexCharts;
+}
+
 @Component({
   tag: 'apex-chart',
   styleUrl: 'apex-chart.css'
