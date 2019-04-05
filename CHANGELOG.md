@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.1.0](https://github.com/apexcharts/stencil-apexcharts/compare/v1.0.1...v1.1.0) (2019-04-05)
+
+
+### Bug Fixes
+
+* Refactor rendering order ([675934b](https://github.com/apexcharts/stencil-apexcharts/commit/675934b))
+
+
+### Features
+
+* add updateOptions method ([1beabec](https://github.com/apexcharts/stencil-apexcharts/commit/1beabec))
+* Expose ApexCharts on window ([1c350f3](https://github.com/apexcharts/stencil-apexcharts/commit/1c350f3))
+
+
+
 ## [1.0.1](https://github.com/apexcharts/stencil-apexcharts/compare/v1.0.0...v1.0.1) (2019-04-04)
 
 
