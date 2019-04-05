@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, Watch } from '@stencil/core';
+import { Component, Element, Prop, State, Watch, Method } from '@stencil/core';
 import ApexCharts from 'apexcharts';
 import { ApexOptions } from 'apexcharts';
 import {
@@ -90,6 +90,21 @@ export class chart {
     if (this.chartObj !== null) {
       this.chartObj.updateSeries(series, true);
     }
+  }
+
+  /**
+   * Updates the configuration object. The new config object is merged with the existing config object preserving the existing configuration.
+   * @param newOptions The configuration object to merge on the existing one
+   * @param redrawPaths When the chart is re-rendered, should it draw from the existing paths or completely redraw the chart paths from the beginning. By default, the chart is re-rendered from the existing paths
+   * @param animate Should the chart animate on re-rendering
+   */
+  @Method()
+  async updateOptions(
+    newOptions: ApexOptions,
+    redrawPaths?: boolean,
+    animate?: boolean
+  ) {
+    return this.chartObj.updateOptions(newOptions, redrawPaths, animate);
   }
 
   componentDidLoad() {

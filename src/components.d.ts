@@ -9,14 +9,14 @@ import '@stencil/core';
 
 
 import {
+  ApexOptions,
+} from 'apexcharts';
+import {
   ApexChartHeight,
   ApexChartType,
   ApexChartWidth,
   ApexOptionsSeries,
 } from './components/apex-chart/apex-charts';
-import {
-  ApexOptions,
-} from 'apexcharts';
 
 
 export namespace Components {
@@ -38,6 +38,10 @@ export namespace Components {
     * (optional) Type
     */
     'type'?: ApexChartType;
+    /**
+    * Updates the configuration object. The new config object is merged with the existing config object preserving the existing configuration.
+    */
+    'updateOptions': (newOptions: ApexCharts.ApexOptions, redrawPaths?: boolean, animate?: boolean) => Promise<void>;
     /**
     * (optional) Width
     */
