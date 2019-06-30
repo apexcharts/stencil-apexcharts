@@ -18,10 +18,13 @@
     "data-visualization",
     "web components"
   ],
-  "module": "dist/esm/index.js",
   "main": "dist/index.js",
-  "unpkg": "dist/ionic.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
   "types": "dist/types/components.d.ts",
+  "unpkg": "dist/stencil-apexcharts/apex.js",
+  "collection:main": "dist/collection/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/"
@@ -34,11 +37,11 @@
     "release": "standard-version"
   },
   "peerDependencies": {
-    "apexcharts": "apexcharts^3.6.5"
+    "apexcharts": "apexcharts^3.8.1"
   },
   "devDependencies": {
-    "@stencil/core": "^0.18.1",
-    "standard-version": "^5.0.2"
+    "@stencil/core": "^1.1.3",
+    "standard-version": "^6.0.1"
   },
   "license": "MIT",
   "standard-version": {

@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, Method } from '@stencil/core';
+import { h, Component, Prop, State, Watch, Method } from '@stencil/core';
 import ApexCharts from 'apexcharts';
 import { ApexOptions } from 'apexcharts';
 import {
@@ -112,7 +112,7 @@ export class chart {
         this.chartRef,
         config(this.options, this.type, this.width, this.height, this.series)
       );
-      return this.chartObj.render()
+      return this.chartObj.render();
     }
   }
 

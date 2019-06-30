@@ -5,22 +5,18 @@
  */
 
 
-import '@stencil/core';
-
-
-import {
-  ApexOptions,
-} from 'apexcharts';
+import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   ApexChartHeight,
   ApexChartType,
   ApexChartWidth,
   ApexOptionsSeries,
 } from './components/apex-chart/apex-charts';
-
+import {
+  ApexOptions,
+} from 'apexcharts';
 
 export namespace Components {
-
   interface ApexChart {
     /**
     * (optional) Height
@@ -47,7 +43,23 @@ export namespace Components {
     */
     'width'?: ApexChartWidth;
   }
-  interface ApexChartAttributes extends StencilHTMLAttributes {
+}
+
+declare global {
+
+
+  interface HTMLApexChartElement extends Components.ApexChart, HTMLStencilElement {}
+  var HTMLApexChartElement: {
+    prototype: HTMLApexChartElement;
+    new (): HTMLApexChartElement;
+  };
+  interface HTMLElementTagNameMap {
+    'apex-chart': HTMLApexChartElement;
+  }
+}
+
+declare namespace LocalJSX {
+  interface ApexChart extends JSXBase.HTMLAttributes<HTMLApexChartElement> {
     /**
     * (optional) Height
     */
@@ -69,39 +81,19 @@ export namespace Components {
     */
     'width'?: ApexChartWidth;
   }
+
+  interface IntrinsicElements {
+    'apex-chart': ApexChart;
+  }
 }
 
-declare global {
-  interface StencilElementInterfaces {
-    'ApexChart': Components.ApexChart;
-  }
-
-  interface StencilIntrinsicElements {
-    'apex-chart': Components.ApexChartAttributes;
-  }
+export { LocalJSX as JSX };
 
 
-  interface HTMLApexChartElement extends Components.ApexChart, HTMLStencilElement {}
-  var HTMLApexChartElement: {
-    prototype: HTMLApexChartElement;
-    new (): HTMLApexChartElement;
-  };
-
-  interface HTMLElementTagNameMap {
-    'apex-chart': HTMLApexChartElement
-  }
-
-  interface ElementTagNameMap {
-    'apex-chart': HTMLApexChartElement;
-  }
-
-
+declare module "@stencil/core" {
   export namespace JSX {
-    export interface Element {}
-    export interface IntrinsicElements extends StencilIntrinsicElements {
-      [tagName: string]: any;
-    }
+    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
   }
-  export interface HTMLAttributes extends StencilHTMLAttributes {}
-
 }
+
+

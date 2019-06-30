@@ -4,15 +4,15 @@ export const config: Config = {
   namespace: 'apex',
   outputTargets:[
     { type: 'dist' },
-    { type: 'docs' },
+    { type: 'docs-readme' },
     {
       type: 'www',
-      serviceWorker: null // disable service workers
-    },
-  ],
-  copy: [
-    {
-      'src': 'examples'
+      serviceWorker: null, // disable service workers
+      copy: [
+        {
+          'src': 'examples'
+        }
+      ]
     }
   ]
 };
