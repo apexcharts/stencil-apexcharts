@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [2.0.0](https://github.com/apexcharts/stencil-apexcharts/compare/v1.1.1...v2.0.0) (2019-06-30)
+
+
+### Features
+
+* upgrade deps ([2429eeb](https://github.com/apexcharts/stencil-apexcharts/commit/2429eeb))
+
+
+### BREAKING CHANGES
+
+* Upgrading to stencil@one is a breaking change.
+
+
 
 ## [1.1.1](https://github.com/apexcharts/stencil-apexcharts/compare/v1.1.0...v1.1.1) (2019-04-05)
 
