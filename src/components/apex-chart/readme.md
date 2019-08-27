@@ -11,7 +11,7 @@
 | --------- | --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | `height`  | `height`  | (optional) Height  | `number \| string`                                                                                                                                            | `undefined` |
 | `options` | --        | (optional) Options | `ApexOptions`                                                                                                                                                 | `undefined` |
-| `series`  | --        | (optional) Series  | `number[] \| { name: string; data: number[] \| { x: any; y: any; }[] \| [number, number][] \| [number, number[]][]; }[]`                                      | `undefined` |
+| `series`  | --        | (optional) Series  | `number[] \| { name: string; type?: string; data: number[] \| { x: any; y: any; }[] \| [number, number][] \| [number, number[]][]; }[]`                       | `undefined` |
 | `type`    | `type`    | (optional) Type    | `"area" \| "bar" \| "bubble" \| "candlestick" \| "donut" \| "heatmap" \| "histogram" \| "line" \| "pie" \| "radar" \| "radialBar" \| "rangeBar" \| "scatter"` | `undefined` |
 | `width`   | `width`   | (optional) Width   | `number \| string`                                                                                                                                            | `undefined` |
 

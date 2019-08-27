@@ -20,26 +20,34 @@ export namespace Components {
   interface ApexChart {
     /**
     * (optional) Height
+    * @see https://apexcharts.com/docs/options/chart/height/
     */
     'height'?: ApexChartHeight;
     /**
     * (optional) Options
+    * @see https://apexcharts.com/docs/options/
     */
     'options'?: ApexOptions;
     /**
     * (optional) Series
+    * @see https://apexcharts.com/docs/options/series/
     */
     'series'?: ApexOptionsSeries;
     /**
     * (optional) Type
+    * @see https://apexcharts.com/docs/options/chart/type/
     */
     'type'?: ApexChartType;
     /**
     * Updates the configuration object. The new config object is merged with the existing config object preserving the existing configuration.
+    * @param newOptions The configuration object to merge on the existing one
+    * @param redrawPaths When the chart is re-rendered, should it draw from the existing paths or completely redraw the chart paths from the beginning. By default, the chart is re-rendered from the existing paths
+    * @param animate Should the chart animate on re-rendering
     */
     'updateOptions': (newOptions: ApexCharts.ApexOptions, redrawPaths?: boolean, animate?: boolean) => Promise<void>;
     /**
     * (optional) Width
+    * @see https://apexcharts.com/docs/options/chart/width/
     */
     'width'?: ApexChartWidth;
   }
@@ -62,22 +70,27 @@ declare namespace LocalJSX {
   interface ApexChart extends JSXBase.HTMLAttributes<HTMLApexChartElement> {
     /**
     * (optional) Height
+    * @see https://apexcharts.com/docs/options/chart/height/
     */
     'height'?: ApexChartHeight;
     /**
     * (optional) Options
+    * @see https://apexcharts.com/docs/options/
     */
     'options'?: ApexOptions;
     /**
     * (optional) Series
+    * @see https://apexcharts.com/docs/options/series/
     */
     'series'?: ApexOptionsSeries;
     /**
     * (optional) Type
+    * @see https://apexcharts.com/docs/options/chart/type/
     */
     'type'?: ApexChartType;
     /**
     * (optional) Width
+    * @see https://apexcharts.com/docs/options/chart/width/
     */
     'width'?: ApexChartWidth;
   }
