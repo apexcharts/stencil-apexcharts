@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/apexcharts/stencil-apexcharts/compare/v2.1.0...v2.1.1) (2019-10-19)
+
+
+### Bug Fixes
+
+* fix optionsChanged watch and add more types ([39bd5ba](https://github.com/apexcharts/stencil-apexcharts/commit/39bd5ba))
+
 ## [2.1.0](https://github.com/apexcharts/stencil-apexcharts/compare/v2.0.0...v2.1.0) (2019-08-27)
 
 
