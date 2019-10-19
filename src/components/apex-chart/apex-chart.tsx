@@ -6,7 +6,7 @@ import {
   ApexChartHeight,
   ApexChartWidth,
   ApexOptionsSeries
-} from './apex-charts';
+} from '.';
 
 const config = (
   options: ApexOptions,
@@ -70,10 +70,10 @@ export class chart {
   @Prop({ mutable: true }) options?: ApexOptions;
 
   @Watch('options')
-  optionsChanged(options) {
+  optionsChanged(options: ApexOptions) {
     if (this.chartObj !== null) {
       return this.chartObj.updateOptions(
-        config(options, this.type, this.width, options, this.series)
+        config(options, this.type, this.width, this.height, this.series)
       );
     }
   }
@@ -85,7 +85,7 @@ export class chart {
   @Prop({ mutable: true }) series?: ApexOptionsSeries;
 
   @Watch('series')
-  seriesChanged(series) {
+  seriesChanged(series: ApexOptionsSeries) {
     if (this.chartObj !== null) {
       this.chartObj.updateSeries(series, true);
     }
