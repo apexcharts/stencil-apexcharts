@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ApexChartHeight, ApexChartType, ApexChartWidth, ApexOptionsSeries } from "./components/apex-chart";
+import { ApexChartHeight, ApexChartStacked, ApexChartStackType, ApexChartToolbar, ApexChartType, ApexChartWidth, ApexOptionsSeries } from "./components/apex-chart";
 import { ApexOptions } from "apexcharts";
 export namespace Components {
     interface ApexChart {
@@ -24,6 +24,21 @@ export namespace Components {
           * @see https ://apexcharts.com/docs/options/series/
          */
         "series"?: ApexOptionsSeries;
+        /**
+          * (optional) StackType
+          * @see https ://apexcharts.com/docs/options/chart/stackType/
+         */
+        "stackType"?: ApexChartStackType;
+        /**
+          * (optional) Stacked
+          * @see https ://apexcharts.com/docs/options/chart/stacked/
+         */
+        "stacked"?: ApexChartStacked;
+        /**
+          * (optional) Toolbar
+          * @see https ://apexcharts.com/docs/options/chart/toolbar/
+         */
+        "toolbar"?: ApexChartToolbar;
         /**
           * (optional) Type
           * @see https ://apexcharts.com/docs/options/chart/type/
@@ -71,6 +86,21 @@ declare namespace LocalJSX {
           * @see https ://apexcharts.com/docs/options/series/
          */
         "series"?: ApexOptionsSeries;
+        /**
+          * (optional) StackType
+          * @see https ://apexcharts.com/docs/options/chart/stackType/
+         */
+        "stackType"?: ApexChartStackType;
+        /**
+          * (optional) Stacked
+          * @see https ://apexcharts.com/docs/options/chart/stacked/
+         */
+        "stacked"?: ApexChartStacked;
+        /**
+          * (optional) Toolbar
+          * @see https ://apexcharts.com/docs/options/chart/toolbar/
+         */
+        "toolbar"?: ApexChartToolbar;
         /**
           * (optional) Type
           * @see https ://apexcharts.com/docs/options/chart/type/

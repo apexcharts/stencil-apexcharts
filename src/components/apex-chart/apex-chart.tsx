@@ -2,6 +2,9 @@ import { Component, h, Method, Prop, State, Watch } from "@stencil/core";
 import ApexCharts, { ApexOptions } from "apexcharts";
 import {
   ApexChartHeight,
+  ApexChartStacked,
+  ApexChartStackType,
+  ApexChartToolbar,
   ApexChartType,
   ApexChartWidth,
   ApexOptionsSeries,
@@ -12,6 +15,9 @@ const config = (
   type: ApexChartType,
   width: ApexChartWidth,
   height: ApexChartHeight,
+  toolbar: ApexChartToolbar,
+  stacked: ApexChartStacked,
+  stackType: ApexChartStackType,
   series: ApexOptionsSeries
 ): ApexOptions => {
   const chart: ApexChart = options.chart ? { ...options.chart } : {};
@@ -23,6 +29,15 @@ const config = (
   }
   if (height) {
     chart.height = height;
+  }
+  if (toolbar) {
+    chart.toolbar = toolbar;
+  }
+  if (stacked) {
+    chart.stacked = stacked;
+  }
+  if (stackType) {
+    chart.stackType = stackType;
   }
   return series ? { ...options, chart, series } : { ...options, chart };
 };
@@ -63,6 +78,24 @@ export class chart {
   @Prop() height?: ApexChartHeight;
 
   /**
+   * (optional) Toolbar
+   * @see https://apexcharts.com/docs/options/chart/toolbar/
+   */
+  @Prop() toolbar?: ApexChartToolbar;
+
+  /**
+   * (optional) Stacked
+   * @see https://apexcharts.com/docs/options/chart/stacked/
+   */
+  @Prop() stacked?: ApexChartStacked;
+
+  /**
+   * (optional) StackType
+   * @see https://apexcharts.com/docs/options/chart/stackType/
+   */
+  @Prop() stackType?: ApexChartStackType;
+
+  /**
    * (optional) Options
    * @see https://apexcharts.com/docs/options/
    */
@@ -72,7 +105,16 @@ export class chart {
   optionsChanged(options: ApexOptions) {
     if (this.chartObj !== null) {
       return this.chartObj.updateOptions(
-        config(options, this.type, this.width, this.height, this.series)
+        config(
+          options,
+          this.type,
+          this.width,
+          this.height,
+          this.toolbar,
+          this.stacked,
+          this.stackType,
+          this.series
+        )
       );
     }
   }
@@ -109,7 +151,16 @@ export class chart {
     if (this.chartObj === null) {
       this.chartObj = new ApexCharts(
         this.chartRef,
-        config(this.options, this.type, this.width, this.height, this.series)
+        config(
+          this.options,
+          this.type,
+          this.width,
+          this.height,
+          this.toolbar,
+          this.stacked,
+          this.stackType,
+          this.series
+        )
       );
       return this.chartObj.render();
     }
