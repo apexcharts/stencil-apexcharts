@@ -1,12 +1,11 @@
-import { h, Component, Prop, State, Watch, Method } from '@stencil/core';
-import ApexCharts from 'apexcharts';
-import { ApexOptions } from 'apexcharts';
+import { Component, h, Method, Prop, State, Watch } from "@stencil/core";
+import ApexCharts, { ApexOptions } from "apexcharts";
 import {
-  ApexChartType,
   ApexChartHeight,
+  ApexChartType,
   ApexChartWidth,
-  ApexOptionsSeries
-} from '.';
+  ApexOptionsSeries,
+} from ".";
 
 const config = (
   options: ApexOptions,
@@ -34,8 +33,8 @@ if (window) {
 }
 
 @Component({
-  tag: 'apex-chart',
-  styleUrl: 'apex-chart.css'
+  tag: "apex-chart",
+  styleUrl: "apex-chart.css",
 })
 export class chart {
   chartRef: HTMLElement;
@@ -69,7 +68,7 @@ export class chart {
    */
   @Prop({ mutable: true }) options?: ApexOptions;
 
-  @Watch('options')
+  @Watch("options")
   optionsChanged(options: ApexOptions) {
     if (this.chartObj !== null) {
       return this.chartObj.updateOptions(
@@ -84,7 +83,7 @@ export class chart {
    */
   @Prop({ mutable: true }) series?: ApexOptionsSeries;
 
-  @Watch('series')
+  @Watch("series")
   seriesChanged(series: ApexOptionsSeries) {
     if (this.chartObj !== null) {
       this.chartObj.updateSeries(series, true);
@@ -116,13 +115,13 @@ export class chart {
     }
   }
 
-  componentDidUnload() {
+  disconnectedCallback() {
     if (this.chartObj !== null) {
       this.chartObj.destroy();
     }
   }
 
   render() {
-    return <div ref={el => (this.chartRef = el)} />;
+    return <div ref={(el) => (this.chartRef = el)} />;
   }
 }
