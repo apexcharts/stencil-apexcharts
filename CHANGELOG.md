@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/apexcharts/stencil-apexcharts/compare/v2.1.2...v2.2.0) (2021-02-21)
+
+
+### Features
+
+* add toolbar/stacked/stacktype options ([455d8a2](https://github.com/apexcharts/stencil-apexcharts/commit/455d8a2f0a6a345acd541eb2f92eb85f7d7a1491))
+
+
+### Bug Fixes
+
+* fix examples ([801f0aa](https://github.com/apexcharts/stencil-apexcharts/commit/801f0aaaafa878933fd34f02674d7704d7f21c6c))
+
 ### [2.1.2](https://github.com/apexcharts/stencil-apexcharts/compare/v2.1.1...v2.1.2) (2021-02-21)
 
 ### [2.1.1](https://github.com/apexcharts/stencil-apexcharts/compare/v2.1.0...v2.1.1) (2019-10-19)
