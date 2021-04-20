@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/apexcharts/stencil-apexcharts/compare/v2.2.1...v2.3.0) (2021-04-20)
+
+
+### Features
+
+* add custom-elements loader config ([6ddef4e](https://github.com/apexcharts/stencil-apexcharts/commit/6ddef4e1eef8e205b4adb43d32541ed57822044b))
+
+
+### Bug Fixes
+
+* use `globalThis.ApexChart` for correct types ([2d6a791](https://github.com/apexcharts/stencil-apexcharts/commit/2d6a79132939b17307d51b99e0fc699041074f88)), closes [#6](https://github.com/apexcharts/stencil-apexcharts/issues/6)
+
 ### [2.2.1](https://github.com/apexcharts/stencil-apexcharts/compare/v2.2.0...v2.2.1) (2021-03-30)
 
 ## [2.2.0](https://github.com/apexcharts/stencil-apexcharts/compare/v2.1.2...v2.2.0) (2021-02-21)
