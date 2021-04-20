@@ -1,26 +1,17 @@
 import { Component, h, Method, Prop, State, Watch } from "@stencil/core";
 import ApexCharts, { ApexOptions } from "apexcharts";
-import {
-  ApexChartHeight,
-  ApexChartStacked,
-  ApexChartStackType,
-  ApexChartToolbar,
-  ApexChartType,
-  ApexChartWidth,
-  ApexOptionsSeries,
-} from ".";
 
 const config = (
   options: ApexOptions,
-  type: ApexChartType,
-  width: ApexChartWidth,
-  height: ApexChartHeight,
-  toolbar: ApexChartToolbar,
-  stacked: ApexChartStacked,
-  stackType: ApexChartStackType,
-  series: ApexOptionsSeries
+  type: globalThis.ApexChart["type"],
+  width: globalThis.ApexChart["width"],
+  height: globalThis.ApexChart["height"],
+  toolbar: globalThis.ApexChart["toolbar"],
+  stacked: globalThis.ApexChart["stacked"],
+  stackType: globalThis.ApexChart["stackType"],
+  series: ApexOptions["series"]
 ): ApexOptions => {
-  const chart: ApexChart = options.chart ? { ...options.chart } : {};
+  const chart: globalThis.ApexChart = options.chart ? { ...options.chart } : {};
   if (type) {
     chart.type = type;
   }
@@ -51,7 +42,7 @@ if (window) {
   tag: "apex-chart",
   styleUrl: "apex-chart.css",
 })
-export class chart {
+export class ApexChart {
   chartRef: HTMLElement;
 
   /**
@@ -63,37 +54,37 @@ export class chart {
    * (optional) Type
    * @see https://apexcharts.com/docs/options/chart/type/
    */
-  @Prop() type?: ApexChartType;
+  @Prop() type?: globalThis.ApexChart["type"];
 
   /**
    * (optional) Width
    * @see https://apexcharts.com/docs/options/chart/width/
    */
-  @Prop() width?: ApexChartWidth;
+  @Prop() width?: globalThis.ApexChart["width"];
 
   /**
    * (optional) Height
    * @see https://apexcharts.com/docs/options/chart/height/
    */
-  @Prop() height?: ApexChartHeight;
+  @Prop() height?: globalThis.ApexChart["height"];
 
   /**
    * (optional) Toolbar
    * @see https://apexcharts.com/docs/options/chart/toolbar/
    */
-  @Prop() toolbar?: ApexChartToolbar;
+  @Prop() toolbar?: globalThis.ApexChart["toolbar"];
 
   /**
    * (optional) Stacked
    * @see https://apexcharts.com/docs/options/chart/stacked/
    */
-  @Prop() stacked?: ApexChartStacked;
+  @Prop() stacked?: globalThis.ApexChart["stacked"];
 
   /**
    * (optional) StackType
    * @see https://apexcharts.com/docs/options/chart/stackType/
    */
-  @Prop() stackType?: ApexChartStackType;
+  @Prop() stackType?: globalThis.ApexChart["stackType"];
 
   /**
    * (optional) Options
@@ -123,10 +114,10 @@ export class chart {
    * (optional) Series
    * @see https://apexcharts.com/docs/options/series/
    */
-  @Prop({ mutable: true }) series?: ApexOptionsSeries;
+  @Prop({ mutable: true }) series?: ApexOptions["series"];
 
   @Watch("series")
-  seriesChanged(series: ApexOptionsSeries) {
+  seriesChanged(series: ApexOptions["series"]) {
     if (this.chartObj !== null) {
       this.chartObj.updateSeries(series, true);
     }

@@ -5,7 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ApexChartHeight, ApexChartStacked, ApexChartStackType, ApexChartToolbar, ApexChartType, ApexChartWidth, ApexOptionsSeries } from "./components/apex-chart";
 import { ApexOptions } from "apexcharts";
 export namespace Components {
     interface ApexChart {
@@ -13,7 +12,7 @@ export namespace Components {
           * (optional) Height
           * @see https ://apexcharts.com/docs/options/chart/height/
          */
-        "height"?: ApexChartHeight;
+        "height"?: globalThis.ApexChart["height"];
         /**
           * (optional) Options
           * @see https ://apexcharts.com/docs/options/
@@ -23,27 +22,27 @@ export namespace Components {
           * (optional) Series
           * @see https ://apexcharts.com/docs/options/series/
          */
-        "series"?: ApexOptionsSeries;
+        "series"?: ApexOptions["series"];
         /**
           * (optional) StackType
           * @see https ://apexcharts.com/docs/options/chart/stackType/
          */
-        "stackType"?: ApexChartStackType;
+        "stackType"?: globalThis.ApexChart["stackType"];
         /**
           * (optional) Stacked
           * @see https ://apexcharts.com/docs/options/chart/stacked/
          */
-        "stacked"?: ApexChartStacked;
+        "stacked"?: globalThis.ApexChart["stacked"];
         /**
           * (optional) Toolbar
           * @see https ://apexcharts.com/docs/options/chart/toolbar/
          */
-        "toolbar"?: ApexChartToolbar;
+        "toolbar"?: globalThis.ApexChart["toolbar"];
         /**
           * (optional) Type
           * @see https ://apexcharts.com/docs/options/chart/type/
          */
-        "type"?: ApexChartType;
+        "type"?: globalThis.ApexChart["type"];
         /**
           * Updates the configuration object. The new config object is merged with the existing config object preserving the existing configuration.
           * @param newOptions The configuration object to merge on the existing one
@@ -55,7 +54,7 @@ export namespace Components {
           * (optional) Width
           * @see https ://apexcharts.com/docs/options/chart/width/
          */
-        "width"?: ApexChartWidth;
+        "width"?: globalThis.ApexChart["width"];
     }
 }
 declare global {
@@ -75,7 +74,7 @@ declare namespace LocalJSX {
           * (optional) Height
           * @see https ://apexcharts.com/docs/options/chart/height/
          */
-        "height"?: ApexChartHeight;
+        "height"?: globalThis.ApexChart["height"];
         /**
           * (optional) Options
           * @see https ://apexcharts.com/docs/options/
@@ -85,32 +84,32 @@ declare namespace LocalJSX {
           * (optional) Series
           * @see https ://apexcharts.com/docs/options/series/
          */
-        "series"?: ApexOptionsSeries;
+        "series"?: ApexOptions["series"];
         /**
           * (optional) StackType
           * @see https ://apexcharts.com/docs/options/chart/stackType/
          */
-        "stackType"?: ApexChartStackType;
+        "stackType"?: globalThis.ApexChart["stackType"];
         /**
           * (optional) Stacked
           * @see https ://apexcharts.com/docs/options/chart/stacked/
          */
-        "stacked"?: ApexChartStacked;
+        "stacked"?: globalThis.ApexChart["stacked"];
         /**
           * (optional) Toolbar
           * @see https ://apexcharts.com/docs/options/chart/toolbar/
          */
-        "toolbar"?: ApexChartToolbar;
+        "toolbar"?: globalThis.ApexChart["toolbar"];
         /**
           * (optional) Type
           * @see https ://apexcharts.com/docs/options/chart/type/
          */
-        "type"?: ApexChartType;
+        "type"?: globalThis.ApexChart["type"];
         /**
           * (optional) Width
           * @see https ://apexcharts.com/docs/options/chart/width/
          */
-        "width"?: ApexChartWidth;
+        "width"?: globalThis.ApexChart["width"];
     }
     interface IntrinsicElements {
         "apex-chart": ApexChart;
