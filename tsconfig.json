@@ -4,15 +4,18 @@
     "allowUnreachableCode": false,
     "declaration": false,
     "experimentalDecorators": true,
-    "lib": ["dom", "es2017"],
-    "moduleResolution": "node",
+    "lib": ["dom", "dom.iterable", "es2022"],
+    "moduleResolution": "bundler",
     "module": "esnext",
-    "target": "es2017",
+    "target": "es2022",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

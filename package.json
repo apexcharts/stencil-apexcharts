@@ -1,6 +1,6 @@
 {
   "name": "stencil-apexcharts",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "Stencil Component for ApexCharts",
   "author": {
     "name": "Mikael Karon",
@@ -25,7 +25,7 @@
   "types": "dist/custom-elements/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/stencil-apexcharts-new/stencil-apexcharts-new.esm.js",
+  "unpkg": "dist/apex/apex.esm.js",
   "files": [
     "dist/",
     "loader/"
@@ -36,19 +36,15 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "release": "standard-version"
+    "release": "npm run build && npm publish"
   },
   "peerDependencies": {
-    "apexcharts": "^3.26.1"
+    "apexcharts": ">=4.0.0"
   },
   "devDependencies": {
-    "@stencil/core": "^2.5.2",
-    "standard-version": "^9.2.0"
+    "@stencil/core": "^4.22.0",
+    "apexcharts": "^5.3.4",
+    "typescript": "^5.6.0"
   },
-  "license": "MIT",
-  "standard-version": {
-    "scripts": {
-      "prerelease": "npm run build"
-    }
-  }
+  "license": "MIT"
 }

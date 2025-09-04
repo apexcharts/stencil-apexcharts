@@ -1,169 +1,299 @@
-import { Component, h, Method, Prop, State, Watch } from "@stencil/core";
+import { 
+  Component, 
+  h, 
+  Method, 
+  Prop, 
+  State, 
+  Watch, 
+  Element 
+} from "@stencil/core";
 import ApexCharts, { ApexOptions } from "apexcharts";
 
-const config = (
-  options: ApexOptions,
-  type: globalThis.ApexChart["type"],
-  width: globalThis.ApexChart["width"],
-  height: globalThis.ApexChart["height"],
-  toolbar: globalThis.ApexChart["toolbar"],
-  stacked: globalThis.ApexChart["stacked"],
-  stackType: globalThis.ApexChart["stackType"],
-  series: ApexOptions["series"]
+type ChartType = 'line' | 'area' | 'bar' | 'pie' | 'donut' | 'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'boxPlot' | 'radar' | 'polarArea' | 'rangeBar' | 'rangeArea' | 'treemap';
+
+type ChartToolbar = {
+  show?: boolean
+  offsetX?: number
+  offsetY?: number
+  tools?: {
+    download?: boolean | string
+    selection?: boolean | string
+    zoom?: boolean | string
+    zoomin?: boolean | string
+    zoomout?: boolean | string
+    pan?: boolean | string
+    reset?: boolean | string
+  }
+  export?: {
+    csv?: {
+      filename?: string
+      columnDelimiter?: string
+      headerCategory?: string
+      headerValue?: string
+    }
+    svg?: {
+      filename?: string
+    }
+    png?: {
+      filename?: string
+    }
+  }
+  autoSelected?: 'zoom' | 'selection' | 'pan'
+}
+
+const buildConfig = (
+  options: ApexOptions = {},
+  overrides: {
+    type?: ChartType;
+    width?: string | number;
+    height?: string | number;
+    toolbar?: ChartToolbar;
+    stacked?: boolean;
+    stackType?: '100%' | 'normal';
+  },
+  series?: ApexOptions['series']
 ): ApexOptions => {
-  const chart: globalThis.ApexChart = options.chart ? { ...options.chart } : {};
-  if (type) {
-    chart.type = type;
+  // Use a simple object for the chart configuration
+  const chart = { ...options.chart };
+  
+  // Apply overrides to chart config
+  if (overrides.type !== undefined) chart.type = overrides.type;
+  if (overrides.width !== undefined) chart.width = overrides.width;
+  if (overrides.height !== undefined) chart.height = overrides.height;
+  if (overrides.toolbar !== undefined) chart.toolbar = overrides.toolbar;
+  if (overrides.stacked !== undefined) chart.stacked = overrides.stacked;
+  if (overrides.stackType !== undefined) chart.stackType = overrides.stackType;
+
+  const config: ApexOptions = { 
+    ...options, 
+    chart 
+  };
+
+  if (series !== undefined) {
+    config.series = series;
   }
-  if (width) {
-    chart.width = width;
-  }
-  if (height) {
-    chart.height = height;
-  }
-  if (toolbar) {
-    chart.toolbar = toolbar;
-  }
-  if (stacked) {
-    chart.stacked = stacked;
-  }
-  if (stackType) {
-    chart.stackType = stackType;
-  }
-  return series ? { ...options, chart, series } : { ...options, chart };
+
+  return config;
 };
 
-if (window) {
-  const win = window as any;
-  win.ApexCharts = ApexCharts;
+if (typeof window !== 'undefined') {
+  (window as any).ApexCharts = ApexCharts;
 }
 
 @Component({
   tag: "apex-chart",
   styleUrl: "apex-chart.css",
+  shadow: false,
 })
-export class ApexChart {
-  chartRef: HTMLElement;
+export class ApexChartComponent {
+  @Element() hostElement!: HTMLElement;
+  
+  private chartRef!: HTMLDivElement;
+  private resizeObserver?: ResizeObserver;
+  private resizeTimeout?: ReturnType<typeof setTimeout>;
 
   /**
    * Internal ApexCharts instance
    */
-  @State() chartObj: ApexCharts = null;
+  @State() chartInstance: ApexCharts | null = null;
 
   /**
-   * (optional) Type
-   * @see https://apexcharts.com/docs/options/chart/type/
+   * Chart type
    */
-  @Prop() type?: globalThis.ApexChart["type"];
+  @Prop() type?: ChartType;
 
   /**
-   * (optional) Width
-   * @see https://apexcharts.com/docs/options/chart/width/
+   * Chart width
    */
-  @Prop() width?: globalThis.ApexChart["width"];
+  @Prop() width?: string | number;
 
   /**
-   * (optional) Height
-   * @see https://apexcharts.com/docs/options/chart/height/
+   * Chart height  
    */
-  @Prop() height?: globalThis.ApexChart["height"];
+  @Prop() height?: string | number;
 
   /**
-   * (optional) Toolbar
-   * @see https://apexcharts.com/docs/options/chart/toolbar/
+   * Toolbar configuration
    */
-  @Prop() toolbar?: globalThis.ApexChart["toolbar"];
+  @Prop() toolbar?: ChartToolbar;
 
   /**
-   * (optional) Stacked
-   * @see https://apexcharts.com/docs/options/chart/stacked/
+   * Enable stacked charts
    */
-  @Prop() stacked?: globalThis.ApexChart["stacked"];
+  @Prop() stacked?: boolean;
 
   /**
-   * (optional) StackType
-   * @see https://apexcharts.com/docs/options/chart/stackType/
+   * Stack type for stacked charts
    */
-  @Prop() stackType?: globalThis.ApexChart["stackType"];
+  @Prop() stackType?: '100%' | 'normal';
 
   /**
-   * (optional) Options
-   * @see https://apexcharts.com/docs/options/
+   * Chart configuration options
    */
   @Prop({ mutable: true }) options?: ApexOptions;
 
-  @Watch("options")
-  optionsChanged(options: ApexOptions) {
-    if (this.chartObj !== null) {
-      return this.chartObj.updateOptions(
-        config(
-          options,
-          this.type,
-          this.width,
-          this.height,
-          this.toolbar,
-          this.stacked,
-          this.stackType,
-          this.series
-        )
-      );
-    }
-  }
-
   /**
-   * (optional) Series
-   * @see https://apexcharts.com/docs/options/series/
+   * Chart series data
    */
-  @Prop({ mutable: true }) series?: ApexOptions["series"];
+  @Prop({ mutable: true }) series?: ApexOptions['series'];
 
-  @Watch("series")
-  seriesChanged(series: ApexOptions["series"]) {
-    if (this.chartObj !== null) {
-      this.chartObj.updateSeries(series, true);
+  @Watch('options')
+  optionsChanged(newOptions: ApexOptions) {
+    if (this.chartInstance) {
+      const config = buildConfig(
+        newOptions,
+        {
+          type: this.type,
+          width: this.width,
+          height: this.height,
+          toolbar: this.toolbar,
+          stacked: this.stacked,
+          stackType: this.stackType,
+        },
+        this.series
+      );
+      
+      this.chartInstance.updateOptions(config, true, true);
+    }
+  }
+
+  @Watch('series')
+  seriesChanged(newSeries: ApexOptions['series']) {
+    if (this.chartInstance && newSeries) {
+      this.chartInstance.updateSeries(newSeries, true);
+    }
+  }
+
+  @Watch('type')
+  @Watch('width') 
+  @Watch('height')
+  @Watch('toolbar')
+  @Watch('stacked')
+  @Watch('stackType')
+  configChanged() {
+    if (this.chartInstance) {
+      const config = buildConfig(
+        this.options,
+        {
+          type: this.type,
+          width: this.width,
+          height: this.height,
+          toolbar: this.toolbar,
+          stacked: this.stacked,
+          stackType: this.stackType,
+        },
+        this.series
+      );
+      
+      this.chartInstance.updateOptions(config, true, true);
     }
   }
 
   /**
-   * Updates the configuration object. The new config object is merged with the existing config object preserving the existing configuration.
-   * @param newOptions The configuration object to merge on the existing one
-   * @param redrawPaths When the chart is re-rendered, should it draw from the existing paths or completely redraw the chart paths from the beginning. By default, the chart is re-rendered from the existing paths
-   * @param animate Should the chart animate on re-rendering
+   * Update chart configuration
    */
   @Method()
   async updateOptions(
     newOptions: ApexOptions,
-    redrawPaths?: boolean,
-    animate?: boolean
-  ) {
-    return this.chartObj.updateOptions(newOptions, redrawPaths, animate);
+    redrawPaths = true,
+    animate = true
+  ): Promise<void> {
+    if (this.chartInstance) {
+      return this.chartInstance.updateOptions(newOptions, redrawPaths, animate);
+    }
+  }
+
+  /**
+   * Update chart series
+   */
+  @Method()
+  async updateSeries(
+    newSeries: ApexOptions['series'],
+    animate = true
+  ): Promise<void> {
+    if (this.chartInstance && newSeries) {
+      return this.chartInstance.updateSeries(newSeries, animate);
+    }
+  }
+
+  /**
+   * Destroy and recreate the chart
+   */
+  @Method()
+  async refresh(): Promise<void> {
+    if (this.chartInstance) {
+      this.chartInstance.destroy();
+      await this.initChart();
+    }
+  }
+
+  private async initChart(): Promise<void> {
+    if (this.chartRef) {
+      const config = buildConfig(
+        this.options,
+        {
+          type: this.type,
+          width: this.width,
+          height: this.height,
+          toolbar: this.toolbar,
+          stacked: this.stacked,
+          stackType: this.stackType,
+        },
+        this.series
+      );
+
+      this.chartInstance = new ApexCharts(this.chartRef, config);
+      await this.chartInstance.render();
+    }
   }
 
   async componentDidLoad() {
-    if (this.chartObj === null) {
-      this.chartObj = new ApexCharts(
-        this.chartRef,
-        config(
-          this.options,
-          this.type,
-          this.width,
-          this.height,
-          this.toolbar,
-          this.stacked,
-          this.stackType,
-          this.series
-        )
-      );
-      return this.chartObj.render();
+    await this.initChart();
+    
+    // Setup resize observer for responsive charts
+    if ('ResizeObserver' in window && this.chartRef) {
+      this.resizeObserver = new ResizeObserver(() => {
+        if (this.chartInstance) {
+          // Debounce resize to avoid too many updates
+          clearTimeout(this.resizeTimeout);
+          this.resizeTimeout = setTimeout(() => {
+            if (this.chartInstance) {
+              // Force chart to recalculate dimensions
+              this.chartInstance.updateOptions({
+                chart: {
+                  width: '100%',
+                  height: this.height || 'auto'
+                }
+              }, false, false);
+            }
+          }, 100);
+        }
+      });
+      this.resizeObserver.observe(this.hostElement);
     }
   }
 
   disconnectedCallback() {
-    if (this.chartObj !== null) {
-      this.chartObj.destroy();
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+    
+    if (this.chartInstance) {
+      this.chartInstance.destroy();
+      this.chartInstance = null;
     }
   }
 
   render() {
-    return <div ref={(el) => (this.chartRef = el)} />;
+    return (
+      <div 
+        class="apex-chart-container"
+        ref={el => this.chartRef = el!}
+      />
+    );
   }
 }

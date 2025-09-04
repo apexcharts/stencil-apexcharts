@@ -6,55 +6,53 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ApexOptions } from "apexcharts";
+export { ApexOptions } from "apexcharts";
 export namespace Components {
     interface ApexChart {
         /**
-          * (optional) Height
-          * @see https ://apexcharts.com/docs/options/chart/height/
+          * Chart height
          */
-        "height"?: globalThis.ApexChart["height"];
+        "height"?: string | number;
         /**
-          * (optional) Options
-          * @see https ://apexcharts.com/docs/options/
+          * Chart configuration options
          */
         "options"?: ApexOptions;
         /**
-          * (optional) Series
-          * @see https ://apexcharts.com/docs/options/series/
+          * Destroy and recreate the chart
          */
-        "series"?: ApexOptions["series"];
+        "refresh": () => Promise<void>;
         /**
-          * (optional) StackType
-          * @see https ://apexcharts.com/docs/options/chart/stackType/
+          * Chart series data
          */
-        "stackType"?: globalThis.ApexChart["stackType"];
+        "series"?: ApexOptions['series'];
         /**
-          * (optional) Stacked
-          * @see https ://apexcharts.com/docs/options/chart/stacked/
+          * Stack type for stacked charts
          */
-        "stacked"?: globalThis.ApexChart["stacked"];
+        "stackType"?: '100%' | 'normal';
         /**
-          * (optional) Toolbar
-          * @see https ://apexcharts.com/docs/options/chart/toolbar/
+          * Enable stacked charts
          */
-        "toolbar"?: globalThis.ApexChart["toolbar"];
+        "stacked"?: boolean;
         /**
-          * (optional) Type
-          * @see https ://apexcharts.com/docs/options/chart/type/
+          * Toolbar configuration
          */
-        "type"?: globalThis.ApexChart["type"];
+        "toolbar"?: ChartToolbar;
         /**
-          * Updates the configuration object. The new config object is merged with the existing config object preserving the existing configuration.
-          * @param newOptions The configuration object to merge on the existing one
-          * @param redrawPaths When the chart is re-rendered, should it draw from the existing paths or completely redraw the chart paths from the beginning. By default, the chart is re-rendered from the existing paths
-          * @param animate Should the chart animate on re-rendering
+          * Chart type
+         */
+        "type"?: ChartType;
+        /**
+          * Update chart configuration
          */
         "updateOptions": (newOptions: ApexOptions, redrawPaths?: boolean, animate?: boolean) => Promise<void>;
         /**
-          * (optional) Width
-          * @see https ://apexcharts.com/docs/options/chart/width/
+          * Update chart series
          */
-        "width"?: globalThis.ApexChart["width"];
+        "updateSeries": (newSeries: ApexOptions["series"], animate?: boolean) => Promise<void>;
+        /**
+          * Chart width
+         */
+        "width"?: string | number;
     }
 }
 declare global {
@@ -71,45 +69,37 @@ declare global {
 declare namespace LocalJSX {
     interface ApexChart {
         /**
-          * (optional) Height
-          * @see https ://apexcharts.com/docs/options/chart/height/
+          * Chart height
          */
-        "height"?: globalThis.ApexChart["height"];
+        "height"?: string | number;
         /**
-          * (optional) Options
-          * @see https ://apexcharts.com/docs/options/
+          * Chart configuration options
          */
         "options"?: ApexOptions;
         /**
-          * (optional) Series
-          * @see https ://apexcharts.com/docs/options/series/
+          * Chart series data
          */
-        "series"?: ApexOptions["series"];
+        "series"?: ApexOptions['series'];
         /**
-          * (optional) StackType
-          * @see https ://apexcharts.com/docs/options/chart/stackType/
+          * Stack type for stacked charts
          */
-        "stackType"?: globalThis.ApexChart["stackType"];
+        "stackType"?: '100%' | 'normal';
         /**
-          * (optional) Stacked
-          * @see https ://apexcharts.com/docs/options/chart/stacked/
+          * Enable stacked charts
          */
-        "stacked"?: globalThis.ApexChart["stacked"];
+        "stacked"?: boolean;
         /**
-          * (optional) Toolbar
-          * @see https ://apexcharts.com/docs/options/chart/toolbar/
+          * Toolbar configuration
          */
-        "toolbar"?: globalThis.ApexChart["toolbar"];
+        "toolbar"?: ChartToolbar;
         /**
-          * (optional) Type
-          * @see https ://apexcharts.com/docs/options/chart/type/
+          * Chart type
          */
-        "type"?: globalThis.ApexChart["type"];
+        "type"?: ChartType;
         /**
-          * (optional) Width
-          * @see https ://apexcharts.com/docs/options/chart/width/
+          * Chart width
          */
-        "width"?: globalThis.ApexChart["width"];
+        "width"?: string | number;
     }
     interface IntrinsicElements {
         "apex-chart": ApexChart;

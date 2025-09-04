@@ -6,30 +6,126 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
-    <title>Stencil ApexCharts demo</title>
+    <title>Stencil ApexCharts v4+ Demo</title>
     <script type="module" src="./build/apex.esm.js"></script>
     <script nomodule src="./build/apex.js"></script>
   </head>
   <body>
-    <apex-chart></apex-chart>
+    <h1>Stencil ApexCharts v4+ Demo</h1>
+
+    <h2>Basic Bar Chart</h2>
+    <apex-chart id="chart1"></apex-chart>
+
+    <h2>Line Chart with Toolbar</h2>
+    <apex-chart id="chart2"></apex-chart>
+
+    <h2>Area Chart</h2>
+    <apex-chart id="chart3"></apex-chart>
+
     <script>
-      const chart = document.querySelector("apex-chart");
-      chart.toolbar = { show: false };
-      chart.stacked = true;
-      chart.stackType = "10%";
-      chart.series = [
+      // Basic Bar Chart
+      const chart1 = document.querySelector("#chart1");
+      chart1.type = "bar";
+      chart1.width = "100%";
+      chart1.height = 350;
+      chart1.series = [
         {
-          name: "sales",
-          data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+          name: "Revenue",
+          data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
         },
         {
-          name: "sales",
-          data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+          name: "Profit",
+          data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
         },
       ];
-      chart.options = {
+      chart1.options = {
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+          categories: [
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+          ],
+        },
+        colors: ["#1f77b4", "#ff7f0e"],
+        title: {
+          text: "Monthly Revenue & Profit",
+        },
+      };
+
+      // Line Chart with Toolbar
+      const chart2 = document.querySelector("#chart2");
+      chart2.type = "line";
+      chart2.width = "100%";
+      chart2.height = 350;
+      chart2.toolbar = {
+        show: true,
+        tools: {
+          download: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true,
+        },
+      };
+      chart2.series = [
+        {
+          name: "Sales",
+          data: [28, 29, 33, 36, 32, 32, 33],
+        },
+        {
+          name: "Visitors",
+          data: [12, 11, 14, 18, 17, 13, 13],
+        },
+      ];
+      chart2.options = {
+        xaxis: {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        },
+        stroke: {
+          curve: "smooth",
+        },
+        title: {
+          text: "Website Analytics",
+        },
+      };
+
+      // Area Chart
+      const chart3 = document.querySelector("#chart3");
+      chart3.type = "area";
+      chart3.width = "100%";
+      chart3.height = 350;
+      chart3.series = [
+        {
+          name: "Users",
+          data: [31, 40, 28, 51, 42, 109, 100],
+        },
+        {
+          name: "Sessions",
+          data: [11, 32, 45, 32, 34, 52, 41],
+        },
+      ];
+      chart3.options = {
+        xaxis: {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 90, 100],
+          },
+        },
+        title: {
+          text: "User Engagement",
         },
       };
     </script>
