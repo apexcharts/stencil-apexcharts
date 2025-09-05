@@ -213,28 +213,6 @@ defineCustomElements(window);
 | `stacked`   | `stacked`    | `boolean`               | `undefined` | Enable stacked charts             |
 | `stackType` | `stack-type` | `'100%' \| 'normal'`    | `undefined` | Stack type for stacked charts     |
 
-#### Chart Types
-
-```typescript
-type ChartType =
-  | "line"
-  | "area"
-  | "bar"
-  | "pie"
-  | "donut"
-  | "radialBar"
-  | "scatter"
-  | "bubble"
-  | "heatmap"
-  | "candlestick"
-  | "boxPlot"
-  | "radar"
-  | "polarArea"
-  | "rangeBar"
-  | "rangeArea"
-  | "treemap";
-```
-
 ### Methods
 
 All methods return `Promise<void>` and can be called programmatically:
@@ -372,12 +350,3 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 ## License
 
 MIT License. See [LICENSE](LICENSE) file for details.
-
----
-
-<p align="center">
-  <a href="https://apexcharts.com">ApexCharts</a> |
-  <a href="https://stenciljs.com">Stencil.js</a> |
-  <a href="https://github.com/apexcharts/stencil-apexcharts/issues">Issues</a> |
-  <a href="https://github.com/apexcharts/stencil-apexcharts/releases">Releases</a>
-</p>
