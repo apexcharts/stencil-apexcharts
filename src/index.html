@@ -11,23 +11,21 @@
     <script nomodule src="./build/apex.js"></script>
   </head>
   <body>
-    <h1>Stencil ApexCharts v4+ Demo</h1>
+    <h1>Stencil ApexCharts Demo</h1>
 
-    <h2>Basic Bar Chart</h2>
+    <h2>Stacked Bar Chart</h2>
     <apex-chart id="chart1"></apex-chart>
 
-    <h2>Line Chart with Toolbar</h2>
+    <h2>Line Chart</h2>
     <apex-chart id="chart2"></apex-chart>
 
-    <h2>Area Chart</h2>
+    <h2>Pie Chart</h2>
     <apex-chart id="chart3"></apex-chart>
 
     <script>
-      // Basic Bar Chart
+      // Stacked Bar Chart
       const chart1 = document.querySelector("#chart1");
       chart1.type = "bar";
-      chart1.width = "100%";
-      chart1.height = 350;
       chart1.series = [
         {
           name: "Revenue",
@@ -39,6 +37,10 @@
         },
       ];
       chart1.options = {
+        chart: {
+          stacked: true,
+          height: 400,
+        },
         xaxis: {
           categories: [
             "Feb",
@@ -58,22 +60,9 @@
         },
       };
 
-      // Line Chart with Toolbar
+      // Line Chart
       const chart2 = document.querySelector("#chart2");
       chart2.type = "line";
-      chart2.width = "100%";
-      chart2.height = 350;
-      chart2.toolbar = {
-        show: true,
-        tools: {
-          download: true,
-          zoom: true,
-          zoomin: true,
-          zoomout: true,
-          pan: true,
-          reset: true,
-        },
-      };
       chart2.series = [
         {
           name: "Sales",
@@ -85,6 +74,9 @@
         },
       ];
       chart2.options = {
+        chart: {
+          height: 400,
+        },
         xaxis: {
           categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
         },
@@ -96,36 +88,14 @@
         },
       };
 
-      // Area Chart
+      // Pie Chart
       const chart3 = document.querySelector("#chart3");
-      chart3.type = "area";
-      chart3.width = "100%";
-      chart3.height = 350;
-      chart3.series = [
-        {
-          name: "Users",
-          data: [31, 40, 28, 51, 42, 109, 100],
-        },
-        {
-          name: "Sessions",
-          data: [11, 32, 45, 32, 34, 52, 41],
-        },
-      ];
+      chart3.type = "pie";
+      chart3.series = [31, 40, 28, 51, 42, 109, 100];
       chart3.options = {
-        xaxis: {
-          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-        },
-        fill: {
-          type: "gradient",
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.7,
-            opacityTo: 0.9,
-            stops: [0, 90, 100],
-          },
-        },
-        title: {
-          text: "User Engagement",
+        chart: {
+          height: 300,
+          width: 500,
         },
       };
     </script>

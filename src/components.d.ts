@@ -26,18 +26,6 @@ export namespace Components {
          */
         "series"?: ApexOptions['series'];
         /**
-          * Stack type for stacked charts
-         */
-        "stackType"?: '100%' | 'normal';
-        /**
-          * Enable stacked charts
-         */
-        "stacked"?: boolean;
-        /**
-          * Toolbar configuration
-         */
-        "toolbar"?: ChartToolbar;
-        /**
           * Chart type
          */
         "type"?: ChartType;
@@ -80,18 +68,6 @@ declare namespace LocalJSX {
           * Chart series data
          */
         "series"?: ApexOptions['series'];
-        /**
-          * Stack type for stacked charts
-         */
-        "stackType"?: '100%' | 'normal';
-        /**
-          * Enable stacked charts
-         */
-        "stacked"?: boolean;
-        /**
-          * Toolbar configuration
-         */
-        "toolbar"?: ChartToolbar;
         /**
           * Chart type
          */

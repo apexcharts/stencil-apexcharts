@@ -11,45 +11,12 @@ import ApexCharts, { ApexOptions } from "apexcharts";
 
 type ChartType = 'line' | 'area' | 'bar' | 'pie' | 'donut' | 'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'boxPlot' | 'radar' | 'polarArea' | 'rangeBar' | 'rangeArea' | 'treemap';
 
-type ChartToolbar = {
-  show?: boolean
-  offsetX?: number
-  offsetY?: number
-  tools?: {
-    download?: boolean | string
-    selection?: boolean | string
-    zoom?: boolean | string
-    zoomin?: boolean | string
-    zoomout?: boolean | string
-    pan?: boolean | string
-    reset?: boolean | string
-  }
-  export?: {
-    csv?: {
-      filename?: string
-      columnDelimiter?: string
-      headerCategory?: string
-      headerValue?: string
-    }
-    svg?: {
-      filename?: string
-    }
-    png?: {
-      filename?: string
-    }
-  }
-  autoSelected?: 'zoom' | 'selection' | 'pan'
-}
-
 const buildConfig = (
   options: ApexOptions = {},
   overrides: {
     type?: ChartType;
     width?: string | number;
     height?: string | number;
-    toolbar?: ChartToolbar;
-    stacked?: boolean;
-    stackType?: '100%' | 'normal';
   },
   series?: ApexOptions['series']
 ): ApexOptions => {
@@ -60,9 +27,6 @@ const buildConfig = (
   if (overrides.type !== undefined) chart.type = overrides.type;
   if (overrides.width !== undefined) chart.width = overrides.width;
   if (overrides.height !== undefined) chart.height = overrides.height;
-  if (overrides.toolbar !== undefined) chart.toolbar = overrides.toolbar;
-  if (overrides.stacked !== undefined) chart.stacked = overrides.stacked;
-  if (overrides.stackType !== undefined) chart.stackType = overrides.stackType;
 
   const config: ApexOptions = { 
     ...options, 
@@ -89,8 +53,6 @@ export class ApexChartComponent {
   @Element() hostElement!: HTMLElement;
   
   private chartRef!: HTMLDivElement;
-  private resizeObserver?: ResizeObserver;
-  private resizeTimeout?: ReturnType<typeof setTimeout>;
 
   /**
    * Internal ApexCharts instance
@@ -113,21 +75,6 @@ export class ApexChartComponent {
   @Prop() height?: string | number;
 
   /**
-   * Toolbar configuration
-   */
-  @Prop() toolbar?: ChartToolbar;
-
-  /**
-   * Enable stacked charts
-   */
-  @Prop() stacked?: boolean;
-
-  /**
-   * Stack type for stacked charts
-   */
-  @Prop() stackType?: '100%' | 'normal';
-
-  /**
    * Chart configuration options
    */
   @Prop({ mutable: true }) options?: ApexOptions;
@@ -146,9 +93,6 @@ export class ApexChartComponent {
           type: this.type,
           width: this.width,
           height: this.height,
-          toolbar: this.toolbar,
-          stacked: this.stacked,
-          stackType: this.stackType,
         },
         this.series
       );
@@ -167,9 +111,6 @@ export class ApexChartComponent {
   @Watch('type')
   @Watch('width') 
   @Watch('height')
-  @Watch('toolbar')
-  @Watch('stacked')
-  @Watch('stackType')
   configChanged() {
     if (this.chartInstance) {
       const config = buildConfig(
@@ -178,9 +119,6 @@ export class ApexChartComponent {
           type: this.type,
           width: this.width,
           height: this.height,
-          toolbar: this.toolbar,
-          stacked: this.stacked,
-          stackType: this.stackType,
         },
         this.series
       );
@@ -235,9 +173,6 @@ export class ApexChartComponent {
           type: this.type,
           width: this.width,
           height: this.height,
-          toolbar: this.toolbar,
-          stacked: this.stacked,
-          stackType: this.stackType,
         },
         this.series
       );
@@ -249,39 +184,9 @@ export class ApexChartComponent {
 
   async componentDidLoad() {
     await this.initChart();
-    
-    // Setup resize observer for responsive charts
-    if ('ResizeObserver' in window && this.chartRef) {
-      this.resizeObserver = new ResizeObserver(() => {
-        if (this.chartInstance) {
-          // Debounce resize to avoid too many updates
-          clearTimeout(this.resizeTimeout);
-          this.resizeTimeout = setTimeout(() => {
-            if (this.chartInstance) {
-              // Force chart to recalculate dimensions
-              this.chartInstance.updateOptions({
-                chart: {
-                  width: '100%',
-                  height: this.height || 'auto'
-                }
-              }, false, false);
-            }
-          }, 100);
-        }
-      });
-      this.resizeObserver.observe(this.hostElement);
-    }
   }
 
   disconnectedCallback() {
-    if (this.resizeTimeout) {
-      clearTimeout(this.resizeTimeout);
-    }
-    
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-    
     if (this.chartInstance) {
       this.chartInstance.destroy();
       this.chartInstance = null;
