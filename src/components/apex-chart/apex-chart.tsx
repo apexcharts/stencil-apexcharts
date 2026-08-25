@@ -137,7 +137,14 @@ export class ApexChartComponent {
     animate = true
   ): Promise<void> {
     if (this.chartInstance) {
-      return this.chartInstance.updateOptions(newOptions, redrawPaths, animate);
+      // `await` rather than `return`: apexcharts resolves updateOptions with
+      // the chart instance, and returning that from a method declared
+      // Promise<void> stopped compiling once the upstream signature changed
+      // from Promise<void> to Promise<ApexCharts>. Awaiting keeps this
+      // method's contract, keeps it building against every apexcharts
+      // version, and avoids handing callers the internal instance across the
+      // custom-element boundary.
+      await this.chartInstance.updateOptions(newOptions, redrawPaths, animate);
     }
   }
 
@@ -150,7 +157,9 @@ export class ApexChartComponent {
     animate = true
   ): Promise<void> {
     if (this.chartInstance && newSeries) {
-      return this.chartInstance.updateSeries(newSeries, animate);
+      // See updateOptions above: awaited, not returned, so this keeps its
+      // Promise<void> contract whatever apexcharts resolves with.
+      await this.chartInstance.updateSeries(newSeries, animate);
     }
   }
 
