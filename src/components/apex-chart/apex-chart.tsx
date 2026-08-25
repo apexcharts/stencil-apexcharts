@@ -9,7 +9,13 @@ import {
 } from "@stencil/core";
 import ApexCharts, { ApexOptions } from "apexcharts";
 
-type ChartType = 'line' | 'area' | 'bar' | 'pie' | 'donut' | 'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'boxPlot' | 'radar' | 'polarArea' | 'rangeBar' | 'rangeArea' | 'treemap';
+// Exported because Stencil's generated dist/types/components.d.ts references
+// ChartType by name in the ApexChart interface. It only emits an import for a
+// referenced type if that type is exported from the component file, so while
+// this was local the generated declarations referred to a name that was never
+// in scope and every consumer typecheck failed with "Cannot find name
+// 'ChartType'".
+export type ChartType = 'line' | 'area' | 'bar' | 'pie' | 'donut' | 'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'boxPlot' | 'radar' | 'polarArea' | 'rangeBar' | 'rangeArea' | 'treemap';
 
 const buildConfig = (
   options: ApexOptions = {},

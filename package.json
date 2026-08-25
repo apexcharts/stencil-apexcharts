@@ -19,12 +19,12 @@
     "web components"
   ],
   "main": "dist/index.cjs.js",
-  "module": "dist/custom-elements/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/custom-elements/index.d.ts",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
+  "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
+  "customElements": "dist/components/index.js",
   "unpkg": "dist/apex/apex.esm.js",
   "files": [
     "dist/",

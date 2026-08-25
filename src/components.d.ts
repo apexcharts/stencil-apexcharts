@@ -5,7 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ChartType } from "./components/apex-chart/apex-chart";
 import { ApexOptions } from "apexcharts";
+export { ChartType } from "./components/apex-chart/apex-chart";
 export { ApexOptions } from "apexcharts";
 export namespace Components {
     interface ApexChart {
