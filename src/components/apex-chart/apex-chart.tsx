@@ -7,7 +7,10 @@ import {
   Watch, 
   Element 
 } from "@stencil/core";
-import ApexCharts, { ApexOptions } from "apexcharts";
+// Types only. The class is the app's own, resolved when a chart is first
+// drawn (loadApexCharts below), never a copy bundled into this package.
+import type ApexCharts from "apexcharts";
+import type { ApexOptions } from "apexcharts";
 
 // Exported because Stencil's generated dist/types/components.d.ts references
 // ChartType by name in the ApexChart interface. It only emits an import for a
@@ -46,8 +49,43 @@ const buildConfig = (
   return config;
 };
 
-if (typeof window !== 'undefined') {
-  (window as any).ApexCharts = ApexCharts;
+/**
+ * The ApexCharts class this element draws with: the app's own.
+ *
+ * Up to 3.1.2 this file imported apexcharts and Stencil bundled the version
+ * installed when the package was built (5.3.5) into every output, so the
+ * element drew with that copy whatever the app had installed, and a CDN page
+ * that loaded apexcharts.min.js first had its window.ApexCharts replaced by
+ * the bundled one. Now apexcharts stays external (stencil.config.ts):
+ *
+ * - A bundled app: import('apexcharts') is resolved by the app's bundler to
+ *   the apexcharts it installed, the peer dependency.
+ * - A script-tag page: that import has nothing to resolve a bare name against
+ *   and fails, and the element uses the window.ApexCharts the page loaded.
+ *
+ * One lookup per page. window.ApexCharts is still set when the page has none,
+ * as it always was, for code that calls ApexCharts.exec() and friends.
+ */
+let apexChartsClass: Promise<typeof ApexCharts> | null = null;
+
+function loadApexCharts(): Promise<typeof ApexCharts> {
+  if (!apexChartsClass) {
+    const win: any = typeof window !== "undefined" ? window : undefined;
+    apexChartsClass = import("apexcharts").then(
+      (mod: any) => {
+        const cls = mod.default ?? mod;
+        if (win && !win.ApexCharts) win.ApexCharts = cls;
+        return cls;
+      },
+      () => {
+        if (win && win.ApexCharts) return win.ApexCharts;
+        throw new Error(
+          "stencil-apexcharts: ApexCharts is not loaded. Install the apexcharts package, or on a page without a bundler load apexcharts.min.js before this component."
+        );
+      }
+    );
+  }
+  return apexChartsClass;
 }
 
 @Component({
@@ -176,12 +214,25 @@ export class ApexChartComponent {
   async refresh(): Promise<void> {
     if (this.chartInstance) {
       this.chartInstance.destroy();
+      this.chartInstance = null;
       await this.initChart();
     }
   }
 
   private async initChart(): Promise<void> {
     if (this.chartRef) {
+      let ApexChartsClass: typeof ApexCharts;
+      try {
+        ApexChartsClass = await loadApexCharts();
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+      // Loading is asynchronous now: the element may have been removed, or
+      // already given a chart by a refresh(), while it waited.
+      if (!this.hostElement.isConnected || this.chartInstance) return;
+
+      // Read after the wait, so props set meanwhile are not lost.
       const config = buildConfig(
         this.options,
         {
@@ -192,7 +243,7 @@ export class ApexChartComponent {
         this.series
       );
 
-      this.chartInstance = new ApexCharts(this.chartRef, config);
+      this.chartInstance = new ApexChartsClass(this.chartRef, config);
       await this.chartInstance.render();
     }
   }

@@ -71,5 +71,18 @@ jobs:
       - run: npm run build
         if: steps.check.outputs.triggered == 'true'
 
+      # The element draws with the app's own apexcharts, so none may ship in
+      # dist. Up to 3.1.2 one did: Stencil bundles what a component imports,
+      # and every output carried the ApexCharts installed on the build machine
+      # (5.3.5). stencil.config.ts keeps it external now.
+      - name: Check dist carries no copy of ApexCharts
+        if: steps.check.outputs.triggered == 'true'
+        run: |
+          if grep -rl --include='*.js' 'ApexCharts v[0-9]' dist; then
+            echo "dist bundles ApexCharts: apexcharts must stay external (stencil.config.ts)"
+            exit 1
+          fi
+          echo "dist leaves apexcharts to the app"
+
       - run: npm publish --provenance --tag ${{ steps.check.outputs.tag }}
         if: steps.check.outputs.triggered == 'true'

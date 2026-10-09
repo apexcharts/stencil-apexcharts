@@ -36,19 +36,17 @@ npm install apexcharts@^4.0.0
 ### Script Tag (CDN)
 
 ```html
-<!-- ApexCharts core library -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts@4.4.0/dist/apexcharts.min.js"></script>
+<!-- ApexCharts itself, first: the component draws with the copy the page loads -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.min.js"></script>
 
 <!-- Stencil ApexCharts component -->
 <script
   type="module"
   src="https://unpkg.com/stencil-apexcharts@3/dist/apex/apex.esm.js"
 ></script>
-<script
-  nomodule
-  src="https://unpkg.com/stencil-apexcharts@3/dist/apex.js"
-></script>
 ```
+
+Since 3.2.0 the component carries no copy of ApexCharts of its own. It draws with the `apexcharts` your app installs, or, on a page without a bundler, with the ApexCharts script the page loads before it. Up to 3.1.2 it bundled ApexCharts 5.3.5 and used that whatever version you had installed.
 
 ### Modern Framework Integration
 
