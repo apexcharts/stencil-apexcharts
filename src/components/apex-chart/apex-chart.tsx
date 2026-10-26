@@ -18,7 +18,13 @@ import type { ApexOptions } from "apexcharts";
 // this was local the generated declarations referred to a name that was never
 // in scope and every consumer typecheck failed with "Cannot find name
 // 'ChartType'".
-export type ChartType = 'line' | 'area' | 'bar' | 'pie' | 'donut' | 'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'boxPlot' | 'radar' | 'polarArea' | 'rangeBar' | 'rangeArea' | 'treemap';
+//
+// Taken from apexcharts' own types rather than listed here. A hand-written
+// list fell behind as core added types (it stopped at 16 while 8.5 accepts
+// funnel, gauge, sunburst, violin and more), so the prop rejected charts
+// that drew fine. Derived, it resolves against the apexcharts the app
+// installs, the same version that draws the chart.
+export type ChartType = NonNullable<NonNullable<ApexOptions["chart"]>["type"]>;
 
 const buildConfig = (
   options: ApexOptions = {},
@@ -107,7 +113,8 @@ export class ApexChartComponent {
   @State() chartInstance: ApexCharts | null = null;
 
   /**
-   * Chart type
+   * Chart type: any `chart.type` the installed apexcharts accepts ("line",
+   * "bar", "funnel", ...).
    */
   @Prop() type?: ChartType;
 

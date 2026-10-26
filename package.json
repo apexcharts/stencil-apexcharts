@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@stencil/core": "^4.22.0",
-    "apexcharts": "^7.9.1",
+    "apexcharts": "^8.5.0",
     "typescript": "^5.6.0"
   },
   "license": "MIT"

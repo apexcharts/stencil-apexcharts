@@ -28,7 +28,7 @@ export namespace Components {
          */
         "series"?: ApexOptions['series'];
         /**
-          * Chart type
+          * Chart type: any `chart.type` the installed apexcharts accepts ("line", "bar", "funnel", ...).
          */
         "type"?: ChartType;
         /**
@@ -71,7 +71,7 @@ declare namespace LocalJSX {
          */
         "series"?: ApexOptions['series'];
         /**
-          * Chart type
+          * Chart type: any `chart.type` the installed apexcharts accepts ("line", "bar", "funnel", ...).
          */
         "type"?: ChartType;
         /**

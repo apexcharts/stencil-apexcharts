@@ -26,12 +26,10 @@
 ### NPM (Recommended)
 
 ```bash
-# Install both packages
 npm install stencil-apexcharts apexcharts
-
-# Peer dependencies
-npm install apexcharts@^4.0.0
 ```
+
+`apexcharts` is a peer dependency: any version from 4.0 works, and the chart draws with the one you install.
 
 ### Script Tag (CDN)
 
@@ -226,13 +224,31 @@ apex-chart {
 
 Before 3.2.1, a percentage height never filled the container. The chart settled at a fixed height of its own whatever the container's size (#18).
 
+### Chart types
+
+`type` takes any chart type your installed `apexcharts` supports, and in TypeScript `ChartType` is read from that same version's types. With apexcharts 8.5 that includes `funnel`, `pyramid`, `gauge`, `histogram`, `sunburst`, `icicle` and the rest of the `chart.type` list, and upgrading apexcharts makes newer types available without a new release of this package.
+
+Since apexcharts 8.0, a few types are not in the default bundle: `violin`, `raincloud`, `waterfall`, `dumbbell`, `streamgraph`, `sunburst`, `icicle`, `unit` and `waffle`. Load the entry for the type you use next to ApexCharts. Each is named after its type, except `waffle`, which comes with `apexcharts/unit`:
+
+```js
+// Bundler: anywhere in your app, once
+import "apexcharts/violin";
+```
+
+```html
+<!-- Script tag: after the ApexCharts script -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/violin.js"></script>
+```
+
+Or use the full bundle (`apexcharts.full.min.js`, or `import "apexcharts/full"`). If a type is missing, ApexCharts logs an error naming the exact import or file it needs.
+
 ## API Reference
 
 ### Properties
 
 | Property    | Attribute    | Type                    | Default     | Description                       |
 | ----------- | ------------ | ----------------------- | ----------- | --------------------------------- |
-| `type`      | `type`       | `ChartType`             | `undefined` | Chart type (line, bar, pie, etc.) |
+| `type`      | `type`       | `ChartType`             | `undefined` | Chart type (line, bar, funnel, etc.), see [Chart types](#chart-types) |
 | `width`     | `width`      | `string \| number`      | `undefined` | Chart width (e.g., '100%', 400)   |
 | `height`    | `height`     | `string \| number`      | `undefined` | Chart height (e.g., 350, '350px', '100%'), see [Sizing](#sizing) |
 | `series`    | --           | `ApexOptions['series']` | `undefined` | Chart data series                 |
@@ -359,7 +375,7 @@ npm run test
 
 - **Node.js**: 16+
 - **Stencil**: 4.x
-- **ApexCharts**: 4.x
+- **ApexCharts**: 4.0 or later
 - **TypeScript**: 5.x (if using TypeScript)
 
 ## Browser Support
