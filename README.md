@@ -196,6 +196,36 @@ defineCustomElements(window);
 </script>
 ```
 
+### Sizing
+
+The chart is as wide as `<apex-chart>`, which is a block element (`width: 100%`) by default. Its height depends on what you set:
+
+| `height`                                | Chart height                                                        |
+| --------------------------------------- | ------------------------------------------------------------------- |
+| not set                                 | Follows the width (width / 1.61 for axis charts). The container's height is ignored. |
+| `350` or `"350px"`                      | Exactly that.                                                       |
+| `"100%"` (or any percentage)            | That share of the container's height, redrawn when the container resizes. |
+
+To fill a fixed-height container, such as a dashboard card, set `height="100%"`:
+
+```html
+<div style="height: 300px">
+  <apex-chart type="bar" height="100%"></apex-chart>
+</div>
+```
+
+`chart.height` in `options` works the same way as the `height` attribute. A percentage needs a container with a height of its own (a fixed height, or a flex or grid item that is stretched). In a container whose height comes from its content, the percentage has nothing to refer to and the chart comes out at a small height of its own; use a pixel height there instead.
+
+With a percentage height, `<apex-chart>` takes its container's full height. If something else shares the container, such as a heading above the chart, give the element its own height and the chart fills that instead:
+
+```css
+apex-chart {
+  height: 240px; /* or flex: 1 inside a flex column */
+}
+```
+
+Before 3.2.1, a percentage height never filled the container. The chart settled at a fixed height of its own whatever the container's size (#18).
+
 ## API Reference
 
 ### Properties
@@ -204,7 +234,7 @@ defineCustomElements(window);
 | ----------- | ------------ | ----------------------- | ----------- | --------------------------------- |
 | `type`      | `type`       | `ChartType`             | `undefined` | Chart type (line, bar, pie, etc.) |
 | `width`     | `width`      | `string \| number`      | `undefined` | Chart width (e.g., '100%', 400)   |
-| `height`    | `height`     | `string \| number`      | `undefined` | Chart height (e.g., '300px', 350) |
+| `height`    | `height`     | `string \| number`      | `undefined` | Chart height (e.g., 350, '350px', '100%'), see [Sizing](#sizing) |
 | `series`    | --           | `ApexOptions['series']` | `undefined` | Chart data series                 |
 | `options`   | --           | `ApexOptions`           | `undefined` | ApexCharts configuration object   |
 | `toolbar`   | --           | `ChartToolbar`          | `undefined` | Toolbar configuration             |

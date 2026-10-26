@@ -1,7 +1,15 @@
 apex-chart {
   display: block;
   width: 100%;
-  height: auto;
+}
+
+/* A percentage chart height ("100%") is resolved by ApexCharts against this
+   element, so while one is set the element takes its container's height
+   (the component toggles the class, see syncFillHeight). :where() keeps the
+   rule at zero specificity: any height an app gives apex-chart itself, even a
+   bare `apex-chart { height: 400px }`, wins over it. */
+:where(apex-chart.apex-chart--fill) {
+  height: 100%;
 }
 
 .apex-chart-container {

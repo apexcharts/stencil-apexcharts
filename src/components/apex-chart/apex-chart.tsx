@@ -49,6 +49,9 @@ const buildConfig = (
   return config;
 };
 
+const isPercentHeight = (height?: string | number): boolean =>
+  typeof height === "string" && height.trim().endsWith("%");
+
 /**
  * The ApexCharts class this element draws with: the app's own.
  *
@@ -114,7 +117,9 @@ export class ApexChartComponent {
   @Prop() width?: string | number;
 
   /**
-   * Chart height  
+   * Chart height: pixels (350, "350px") or a percentage of the element's
+   * container ("100%"). A percentage needs a container with a height of its
+   * own. Unset, the height follows the width.
    */
   @Prop() height?: string | number;
 
@@ -140,7 +145,8 @@ export class ApexChartComponent {
         },
         this.series
       );
-      
+
+      this.syncFillHeight(config.chart?.height);
       this.chartInstance.updateOptions(config, true, true);
     }
   }
@@ -166,7 +172,8 @@ export class ApexChartComponent {
         },
         this.series
       );
-      
+
+      this.syncFillHeight(config.chart?.height);
       this.chartInstance.updateOptions(config, true, true);
     }
   }
@@ -181,6 +188,10 @@ export class ApexChartComponent {
     animate = true
   ): Promise<void> {
     if (this.chartInstance) {
+      // Partial options: one that does not set a height keeps the current one.
+      if (newOptions.chart?.height !== undefined) {
+        this.syncFillHeight(newOptions.chart.height);
+      }
       // `await` rather than `return`: apexcharts resolves updateOptions with
       // the chart instance, and returning that from a method declared
       // Promise<void> stopped compiling once the upstream signature changed
@@ -243,9 +254,24 @@ export class ApexChartComponent {
         this.series
       );
 
+      this.syncFillHeight(config.chart?.height);
       this.chartInstance = new ApexChartsClass(this.chartRef, config);
       await this.chartInstance.render();
     }
+  }
+
+  /**
+   * ApexCharts resolves a percentage height against the chart div's parent,
+   * which is this element. At height: auto this element is only as tall as
+   * the chart inside it, so "100%" was a percentage of a height the chart set
+   * itself, and the chart settled at an arbitrary size whatever the container
+   * (154px in a 300px box, issue #18). The class gives this element its
+   * container's height (apex-chart.css). Toggled here rather than in render()
+   * because it must be in place before ApexCharts measures, which a watcher
+   * does before the next render.
+   */
+  private syncFillHeight(height?: string | number) {
+    this.hostElement.classList.toggle("apex-chart--fill", isPercentHeight(height));
   }
 
   async componentDidLoad() {

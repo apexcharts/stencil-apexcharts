@@ -12,7 +12,7 @@ export { ApexOptions } from "apexcharts";
 export namespace Components {
     interface ApexChart {
         /**
-          * Chart height
+          * Chart height: pixels (350, "350px") or a percentage of the element's container ("100%"). A percentage needs a container with a height of its own. Unset, the height follows the width.
          */
         "height"?: string | number;
         /**
@@ -59,7 +59,7 @@ declare global {
 declare namespace LocalJSX {
     interface ApexChart {
         /**
-          * Chart height
+          * Chart height: pixels (350, "350px") or a percentage of the element's container ("100%"). A percentage needs a container with a height of its own. Unset, the height follows the width.
          */
         "height"?: string | number;
         /**
