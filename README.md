@@ -46,6 +46,55 @@ npm install stencil-apexcharts apexcharts
 
 Since 3.2.0 the component carries no copy of ApexCharts of its own. It draws with the `apexcharts` your app installs, or, on a page without a bundler, with the ApexCharts script the page loads before it. Up to 3.1.2 it bundled ApexCharts 5.3.5 and used that whatever version you had installed.
 
+### Using with Ignite UI
+
+From ApexCharts 8.8.0, charts can follow the Ignite UI theme on the page: its palette, text, gridlines, tooltips, font and light or dark variant. Load the add-on once, after ApexCharts and before the first chart renders. It is free and needs no license key.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.min.js"></script>
+<!-- Ignite UI theming, after apexcharts.min.js -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/features/ignite-ui.js"></script>
+
+<script
+  type="module"
+  src="https://unpkg.com/stencil-apexcharts@3/dist/apex/apex.esm.js"
+></script>
+```
+
+With a bundler, import it once instead:
+
+```typescript
+import "apexcharts/features/ignite-ui";
+```
+
+Without the add-on the `--ig-*` tokens are ignored, with no error.
+
+To turn it off for one chart:
+
+```javascript
+chart.options = {
+  theme: { designSystem: false }, // ignore the Ignite UI theme, keep the --apx-* tokens
+  // theme: { tokens: false },    // ignore the --apx-* tokens and the Ignite UI theme
+};
+```
+
+The Ignite UI theme ranks below everything you set:
+
+```
+explicit options  >  the chart's own CSS variables  >  --apx-* tokens  >  a named theme or palette  >  --ig-* tokens  >  defaults
+```
+
+Tokens are read on every render. After swapping the theme stylesheet at runtime, give the chart an id (`options.chart.id`) and call `refreshTokens()` on its instance once the new stylesheet has loaded:
+
+```javascript
+// after the new stylesheet has loaded
+ApexCharts.getChartByID("sales-chart")?.refreshTokens();
+```
+
+The theme names its font but does not load it, so include the font's stylesheet on the page, as the Ignite UI setup already asks; the chart re-measures once the font has loaded.
+
+With `chart.injectStyleSheet: false` in the light DOM (for example under a strict CSP), link `apexcharts/dist/apexcharts-ignite-ui.css` after `apexcharts.css`, or tooltips and menus keep their default colors.
+
 ### Modern Framework Integration
 
 #### Stencil/Vanilla JS
